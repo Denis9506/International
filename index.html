@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vocabulary Trainer — EN/UK</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>Vocabulary Trainer</h1>
+      <p class="subtitle">English &rarr; Ukrainian · International Relations</p>
+      <nav class="tabs" role="tablist">
+        <span class="tab-indicator" id="tab-indicator"></span>
+        <button class="tab active" role="tab" aria-selected="true" data-tab="list">Vocabulary List</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="quiz">Quiz</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card panel active" id="panel-list" role="tabpanel">
+        <div class="panel-head">
+          <h2>All phrases</h2>
+          <input type="search" id="search" placeholder="Search…" aria-label="Search phrases" />
+        </div>
+        <div class="table-wrap">
+          <table id="vocab-table">
+            <thead>
+              <tr><th class="col-num">#</th><th>English</th><th>Ukrainian</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="empty" id="no-results" hidden>Nothing found.</p>
+      </section>
+
+      <section class="card panel" id="panel-quiz" role="tabpanel">
+        <div class="panel-head">
+          <h2>Quiz</h2>
+        </div>
+
+        <!-- Settings -->
+        <div class="setup" id="setup">
+          <div class="setting">
+            <span class="setting-label">Question language</span>
+            <div class="segmented" id="direction" role="radiogroup">
+              <button type="button" class="seg active" data-dir="en" role="radio" aria-checked="true">English &rarr; Ukrainian</button>
+              <button type="button" class="seg" data-dir="uk" role="radio" aria-checked="false">Ukrainian &rarr; English</button>
+              <button type="button" class="seg" data-dir="mix" role="radio" aria-checked="false">Mixed</button>
+            </div>
+          </div>
+
+          <div class="setting">
+            <label class="setting-label" for="count-range">
+              Number of questions: <b id="count-value">10</b>
+            </label>
+            <input type="range" id="count-range" min="5" max="56" step="1" value="10" />
+          </div>
+
+          <div class="setting">
+            <label class="setting-label" for="options-range">
+              Answer options: <b id="options-value">4</b>
+            </label>
+            <input type="range" id="options-range" min="3" max="6" step="1" value="4" />
+          </div>
+
+          <button class="primary-btn wide" id="start-btn" type="button">Start Quiz</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Quiz modal -->
+  <div class="modal-overlay" id="modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal-head">
+        <h3 class="modal-title" id="modal-title">Quiz</h3>
+        <button class="close-btn" id="close-btn" type="button" aria-label="Close quiz">&times;</button>
+      </header>
+
+      <div class="modal-stats" id="modal-stats">
+        <span class="score" id="progress">Question 1 / 10</span>
+        <span class="score" id="score">Score: 0 / 0</span>
+      </div>
+      <div class="progress-bar"><span id="progress-fill"></span></div>
+
+      <div class="modal-body">
+        <!-- Active quiz -->
+        <div class="quiz-area" id="quiz-area">
+          <p class="prompt-label" id="prompt-label">Choose the Ukrainian translation</p>
+          <div class="question" id="question"></div>
+          <div class="options" id="options"></div>
+        </div>
+
+        <!-- Results -->
+        <div class="result" id="result" hidden>
+          <div class="result-emoji" id="result-emoji">🎉</div>
+          <h3 id="result-title">Quiz complete!</h3>
+          <p class="result-score" id="result-score">10 / 10 (100%)</p>
+          <div class="result-actions">
+            <button class="primary-btn" id="again-btn" type="button">Try again</button>
+            <button class="ghost-btn" id="settings-btn" type="button">Change settings</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="modal-foot" id="modal-foot">
+        <span class="feedback" id="feedback"></span>
+        <button class="primary-btn" id="next-btn" type="button" hidden>Next Question</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
